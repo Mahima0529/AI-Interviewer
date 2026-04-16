@@ -11,7 +11,6 @@ import { ServerUrl } from '../App';
 import { useDispatch } from 'react-redux';
 function Auth({isModel = false}) {
    const dispatch = useDispatch()
-
     const handleGoogleAuth = async () => {
         try {
             const response = await signInWithPopup(auth,provider)
@@ -21,34 +20,23 @@ function Auth({isModel = false}) {
              const result = await axios.post(ServerUrl + "/api/auth/google" , {name , email} , {withCredentials:true})
             dispatch(setUserData(result.data))
             
-console.log(response)
-
-            
+console.log(response)   
         } catch (error) {
             console.log(error)
               dispatch(setUserData(null))
         }
     }
   return (
-    <div className={`
-      w-full 
-      ${isModel ? "py-4" : "min-h-screen bg-[#f3f3f3] flex items-center justify-center px-6 py-20"}
-    `}>
+    <div className={` w-full  ${isModel ? "py-4" : "min-h-screen bg-[#f3f3f3] flex items-center justify-center px-6 py-20"} `}>
         <motion.div 
-        initial={{opacity:0 , y:-40}} 
-        animate={{opacity:1 , y:0}} 
-        transition={{duration:1.05}}
-        className={`
-        w-full 
-        ${isModel ? "max-w-md p-8 rounded-3xl" : "max-w-lg p-12 rounded-[32px]"}
-        bg-white shadow-2xl border border-gray-200
-      `}>
+        initial={{opacity:0 , y:-40}} animate={{opacity:1 , y:0}}  transition={{duration:1.05}}
+        className={` w-full  ${isModel ? "max-w-md p-8 rounded-3xl" : "max-w-lg p-12 rounded-[32px]"} bg-white shadow-2xl border border-gray-200 `}>
             <div className='flex items-center justify-center gap-3 mb-6'>
                 <div className='bg-black text-white p-2 rounded-lg'>
                     <BsRobot size={18}/>
 
                 </div>
-                <h2 className='font-semibold text-lg'>InterviewIQ.AI</h2>
+                <h2 className='font-semibold text-lg'>AI Interviewer</h2>
             </div>
 
             <h1 className='text-2xl md:text-3xl font-semibold text-center leading-snug mb-4'>
@@ -64,8 +52,6 @@ console.log(response)
                 Sign in to start AI-powered mock interviews,
         track your progress, and unlock detailed performance insights.
             </p>
-
-
             <motion.button 
             onClick={handleGoogleAuth}
             whileHover={{opacity:0.9 , scale:1.03}}
@@ -77,10 +63,7 @@ console.log(response)
    
             </motion.button>
         </motion.div>
-
-      
     </div>
   )
 }
-
 export default Auth
